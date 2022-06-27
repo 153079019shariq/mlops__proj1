@@ -1,7 +1,7 @@
 """
  Author : Shariq
  Purpose : Unitest for churn library
- Date : 27 June 2022
+ Date : 27 June 202
 """
 import os
 import logging
@@ -102,6 +102,8 @@ def test_encoder_helper(read_df):
 def test_perform_feature_engineering(feature_eng_analysis):
     '''
     test perform_feature_engineering
+    input  : the feature_eng_analysis output consisting of X_train, X_test, y_train, y_test
+    output : None
     '''
     X_train, X_test, y_train, y_test = feature_eng_analysis
     try:
@@ -116,7 +118,7 @@ def test_perform_feature_engineering(feature_eng_analysis):
 def test_train_models(feature_eng_analysis):
     '''
     test train_models
-    input  : the feature_eng_analysis output onsisting of X_train, X_test, y_train, y_test
+    input  : the feature_eng_analysis output consisting of X_train, X_test, y_train, y_test
     output : None
     '''
     X_train, X_test, y_train, y_test = feature_eng_analysis
