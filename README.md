@@ -14,9 +14,12 @@ The data has been downloaded from Kaggle.
 
 ## Running Files
   1. All the python package dependencies need to be installed. These are present in the file requirements_py3.8.txt. Use the command:
+      <br />
       pip install -r requirements_py3.8.txt
   2. To run the file use the following commands:
+      <br />
        ipython churn_library.py
+       <br />
        ipython churn_script_logging_and_tests.py
  
 
