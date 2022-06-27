@@ -241,17 +241,17 @@ def train_models(X_train, X_test, y_train, y_test):
     lrc = LogisticRegression(solver='lbfgs', max_iter=3000)
 
     param_grid = {
-        'n_estimators': [200, 500],
+        'n_estimators': [200],
         'max_features': ['auto', 'sqrt'],
-        'max_depth': [4, 5, 100],
-        'criterion': ['gini', 'entropy']
+        'max_depth': [100],
+        'criterion': ['entropy']
     }
 
     cv_rfc = GridSearchCV(estimator=rfc, param_grid=param_grid, cv=5)
     cv_rfc.fit(X_train, y_train)
-
+    #print(cv_rfc.best_estimator_)
     lrc.fit(X_train, y_train)
-
+     
     joblib.dump(cv_rfc.best_estimator_, './models/rfc_model.pkl')
     joblib.dump(lrc, './models/logistic_model.pkl')
 
@@ -290,5 +290,5 @@ if __name__ == "__main__":
     perform_eda(data)
 
     X_train, X_test, y_train, y_test = perform_feature_engineering(data)
-    #train_models(X_train, X_test, y_train, y_test)
+    train_models(X_train, X_test, y_train, y_test)
     #plotting_check(X_train, X_test, y_train, y_test)

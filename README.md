@@ -10,7 +10,7 @@ The project contains two important files:
 
 <br />
    
-.
+
  * [data](./data)
    * [bank_data.csv](./data/bank_data.csv)
  * [requirements_py3.6.txt](./requirements_py3.6.txt)
@@ -34,10 +34,12 @@ The project contains two important files:
    * [churn_library.log](./logs/churn_library.log)
  * [churn_library.py](./churn_library.py)
  * [README.md](./README.md)
+ * [__pycache__](./__pycache__)
+   * [churn_script_logging_and_tests.cpython-38-pytest-7.1.2.pyc](./__pycache__/churn_script_logging_and_tests.cpython-38-pytest-7.1.2.pyc)
+   * [churn_library.cpython-38.pyc](./__pycache__/churn_library.cpython-38.pyc)
  * [models](./models)
    * [logistic_model.pkl](./models/logistic_model.pkl)
    * [rfc_model.pkl](./models/rfc_model.pkl)
- * [tree-md](./tree-md)(mlops_proj1) 
 
 The data has been downloaded from Kaggle. 
   

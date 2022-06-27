@@ -36,14 +36,14 @@ def feature_eng_analysis(read_df):
     return cls.perform_feature_engineering(read_df)
 
 
-def test_import(read_df):
+def test_import():
     '''
     test data import - this example is completed for you to assist with the other test functions
     input : dataframe
     output : None
     '''
     try:
-        df = read_df
+        df = cls.import_data(PATH)
         logging.info("Imported the data successfully")
     except FileNotFoundError as err:
         logging.error("Testing import_eda: The file wasn't found")
@@ -56,6 +56,7 @@ def test_import(read_df):
         logging.error(
             "Testing import_data: The file doesn't appear to have rows and columns")
         raise err
+    return df
 
 
 def test_eda(read_df):
@@ -99,13 +100,14 @@ def test_encoder_helper(read_df):
     logging.info("Encoder_helper successfully performed")
 
 
-def test_perform_feature_engineering(feature_eng_analysis):
+def test_perform_feature_engineering(read_df):
     '''
     test perform_feature_engineering
     input  : the feature_eng_analysis output consisting of X_train, X_test, y_train, y_test
     output : None
     '''
-    X_train, X_test, y_train, y_test = feature_eng_analysis
+    X_train, X_test, y_train, y_test = cls.perform_feature_engineering(read_df)
+
     try:
         assert X_train.shape[0] == y_train.shape[0]
         assert X_test.shape[0] == y_test.shape[0]
@@ -113,7 +115,7 @@ def test_perform_feature_engineering(feature_eng_analysis):
         logging.error("ERROR:  Feature Engineering not performed properly")
         raise err
     logging.info("Feature Engineering  successfully performed")
-
+    return X_train, X_test, y_train, y_test
 
 def test_train_models(feature_eng_analysis):
     '''
@@ -138,12 +140,15 @@ def test_train_models(feature_eng_analysis):
 
 
 if __name__ == "__main__":
-    """
-    df = read_df()
-    test_import(df)
+    artifacts_dir = ["images/eda","images/results","models"]
+    for directory in artifacts_dir:
+      for files in os.listdir(directory):
+        if(os.path.exists(os.path.join(directory,files))):
+          os.remove(os.path.join(directory,files))
+
+    df = test_import()
     test_eda(df)
     test_encoder_helper(df)
-    val = feature_eng_analysis(df)
-    test_perform_feature_engineering(val)
+    val = test_perform_feature_engineering(df)
     test_train_models(val)
-    """
+    
