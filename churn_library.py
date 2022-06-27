@@ -255,7 +255,7 @@ def train_models(X_train, X_test, y_train, y_test):
     joblib.dump(cv_rfc.best_estimator_, './models/rfc_model.pkl')
     joblib.dump(lrc, './models/logistic_model.pkl')
 
-#def plotting_check(X_train, X_test, y_train, y_test):
+def prediction(X_train, X_test, y_train, y_test):
 
     print("Inside_plotting_check")
     model_rf = joblib.load('./models/rfc_model.pkl')
@@ -291,4 +291,4 @@ if __name__ == "__main__":
 
     X_train, X_test, y_train, y_test = perform_feature_engineering(data)
     train_models(X_train, X_test, y_train, y_test)
-    #plotting_check(X_train, X_test, y_train, y_test)
+    prediction(X_train, X_test, y_train, y_test)
