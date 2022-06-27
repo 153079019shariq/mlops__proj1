@@ -26,6 +26,7 @@ def read_df():
     """
     return cls.import_data(PATH)
 
+
 @pytest.fixture(scope="module")
 def feature_eng_analysis(read_df):
     """
@@ -117,6 +118,7 @@ def test_perform_feature_engineering(read_df):
     logging.info("Feature Engineering  successfully performed")
     return X_train, X_test, y_train, y_test
 
+
 def test_train_models(feature_eng_analysis):
     '''
     test train_models
@@ -140,15 +142,14 @@ def test_train_models(feature_eng_analysis):
 
 
 if __name__ == "__main__":
-    artifacts_dir = ["images/eda","images/results","models"]
+    artifacts_dir = ["images/eda", "images/results", "models"]
     for directory in artifacts_dir:
-      for files in os.listdir(directory):
-        if(os.path.exists(os.path.join(directory,files))):
-          os.remove(os.path.join(directory,files))
+        for files in os.listdir(directory):
+            if(os.path.exists(os.path.join(directory, files))):
+                os.remove(os.path.join(directory, files))
 
     df = test_import()
     test_eda(df)
     test_encoder_helper(df)
     val = test_perform_feature_engineering(df)
     test_train_models(val)
-    

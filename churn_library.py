@@ -66,7 +66,7 @@ def perform_eda(df):
 
     plt.figure(figsize=(20, 10))
     sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths=2)
-    plt.savefig(os.path.join("images/eda/","Heatmap_distribution.png"))
+    plt.savefig(os.path.join("images/eda/", "Heatmap_distribution.png"))
     # pp.savefig(fig5)
     # pp.close()
 
@@ -98,8 +98,8 @@ def perform_feature_engineering(df):
               df: pandas dataframe
 
     output:
-              X_train: X training data
-              X_test: X testing data
+              x_train: X training data
+              x_test: X testing data
               y_train: y training data
               y_test: y testing data
     '''
@@ -136,9 +136,9 @@ def perform_feature_engineering(df):
         'Card_Category_Churn']
 
     X = df[keep_cols]
-    X_train, X_test, y_train, y_test = train_test_split(
+    x_train, x_test, y_train, y_test = train_test_split(
         X, y, test_size=0.3, random_state=42)
-    return X_train, X_test, y_train, y_test
+    return x_train, x_test, y_train, y_test
 
 
 def classification_report_image(y_train,
@@ -218,15 +218,15 @@ def feature_importance_plot(model, X_data, output_pth):
     # Add feature names as x-axis labels
     plt.xticks(range(X_data.shape[1]), names, rotation=90, fontsize=10)
     plt.yticks(fontsize=20)
-    plt.savefig(os.path.join(output_pth,'Feature_Importance.png'))
+    plt.savefig(os.path.join(output_pth, 'Feature_Importance.png'))
 
 
-def train_models(X_train, X_test, y_train, y_test):
+def train_models(x_train, x_test, y_train, y_test):
     '''
     train, store model results: images + scores, and store models
     input:
-              X_train: X training data
-              X_test: X testing data
+              x_train: X training data
+              x_test: X testing data
               y_train: y training data
               y_test: y testing data
     output:
@@ -248,23 +248,25 @@ def train_models(X_train, X_test, y_train, y_test):
     }
 
     cv_rfc = GridSearchCV(estimator=rfc, param_grid=param_grid, cv=5)
-    cv_rfc.fit(X_train, y_train)
-    #print(cv_rfc.best_estimator_)
-    lrc.fit(X_train, y_train)
-     
+    cv_rfc.fit(x_train, y_train)
+    # print(cv_rfc.best_estimator_)
+    lrc.fit(x_train, y_train)
+
+
     joblib.dump(cv_rfc.best_estimator_, './models/rfc_model.pkl')
     joblib.dump(lrc, './models/logistic_model.pkl')
 
-def prediction(X_train, X_test, y_train, y_test):
+
+def prediction(x_train, x_test, y_train, y_test):
 
     print("Inside_plotting_check")
     model_rf = joblib.load('./models/rfc_model.pkl')
     model_lr = joblib.load('./models/logistic_model.pkl')
 
-    y_train_preds_rf = model_rf.predict(X_train)
-    y_test_preds_rf = model_rf.predict(X_test)
-    y_train_preds_lr = model_lr.predict(X_train)
-    y_test_preds_lr = model_lr.predict(X_test)
+    y_train_preds_rf = model_rf.predict(x_train)
+    y_test_preds_rf = model_rf.predict(x_test)
+    y_train_preds_lr = model_lr.predict(x_train)
+    y_test_preds_lr = model_lr.predict(x_test)
 
     classification_report_image(y_train,
                                 y_test,
@@ -276,19 +278,18 @@ def prediction(X_train, X_test, y_train, y_test):
     # plots
     plt.figure(figsize=(15, 8))
     ax = plt.gca()
-    lrc_plot = plot_roc_curve(model_lr, X_test, y_test)
-    plot_roc_curve(model_rf, X_test, y_test, ax=ax, alpha=0.8)
+    lrc_plot = plot_roc_curve(model_lr, x_test, y_test)
+    plot_roc_curve(model_rf, x_test, y_test, ax=ax, alpha=0.8)
     lrc_plot.plot(ax=ax, alpha=0.8)
     plt.savefig('images/results/ROC_plot.png')
 
-    feature_importance_plot(model_rf, X_test, "images/results/")
+    feature_importance_plot(model_rf, x_test, "images/results/")
 
 
 if __name__ == "__main__":
     PATH = ("data/bank_data.csv")
     data = import_data(PATH)
     perform_eda(data)
-
-    X_train, X_test, y_train, y_test = perform_feature_engineering(data)
-    train_models(X_train, X_test, y_train, y_test)
-    prediction(X_train, X_test, y_train, y_test)
+    x_train, x_test, y_train, y_test = perform_feature_engineering(data)
+    train_models(x_train, x_test, y_train, y_test)
+    prediction(x_train, x_test, y_train, y_test)
