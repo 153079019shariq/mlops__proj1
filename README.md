@@ -10,6 +10,20 @@ The project contains two important files:
    1. churn_library.py                   : This file contain code for loading data, performing feature engineering, training the model and saving it. 
    2. churn_script_logging_and_tests.py  : This file contains the unit test for testing the functions of churn_library.py
 <br />
+
+ * [tree-md](./tree-md)
+ * [dir2](./dir2)
+   * [file21.ext](./dir2/file21.ext)
+   * [file22.ext](./dir2/file22.ext)
+   * [file23.ext](./dir2/file23.ext)
+ * [dir1](./dir1)
+   * [file11.ext](./dir1/file11.ext)
+   * [file12.ext](./dir1/file12.ext)
+ * [file_in_root.ext](./file_in_root.ext)
+ * [README.md](./README.md)
+ * [dir3](./dir3)
+
+
 The data has been downloaded from Kaggle. 
   
 
