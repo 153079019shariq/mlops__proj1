@@ -6,10 +6,7 @@
  The project will help us to identify the customers who are likely to churn. It consist of the code to carry feature engineering, train, predict and evaluate the machine learning model. It also has unit test to test the functionality of each of the functions
 
 ## Files and data description
-The project contains two important files:
-
-<br />
-   
+The project contains the following files:   
 
  * [data](./data)
    * [bank_data.csv](./data/bank_data.csv)
