@@ -10,7 +10,7 @@ The project contains two important files:
    1. churn_library.py                   : This file contain code for loading data, performing feature engineering, training the model and saving it. 
    2. churn_script_logging_and_tests.py  : This file contains the unit test for testing the functions of churn_library.py
 <br />
-   tree
+   
  * [tree](./tree-md)
  * [dir2](./dir2)
    * [file21.ext](./dir2/file21.ext)
